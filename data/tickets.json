@@ -1,0 +1,37 @@
+[
+  {
+    "id": "INC-101",
+    "priority": "low",
+    "summary": "Update company logo on internal wiki",
+    "owner": "alex",
+    "status": "open"
+  },
+  {
+    "id": "INC-102",
+    "priority": "medium",
+    "summary": "Laptop keyboard intermittently unresponsive",
+    "owner": "jordan",
+    "status": "open"
+  },
+  {
+    "id": "INC-103",
+    "priority": "medium",
+    "summary": "VPN disconnects during video calls",
+    "owner": "alex",
+    "status": "in_progress"
+  },
+  {
+    "id": "INC-104",
+    "priority": "high",
+    "summary": "Payment page returns an error",
+    "owner": "sam",
+    "status": "open"
+  },
+  {
+    "id": "INC-109",
+    "priority": "high",
+    "summary": "Customer cannot reset password",
+    "owner": "jordan",
+    "status": "open"
+  }
+]

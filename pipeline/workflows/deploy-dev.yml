@@ -1,0 +1,85 @@
+name: Build and deploy to dev
+
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.value }}
+      digest: ${{ steps.meta.outputs.digest }}
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Read the version
+        id: version
+        run: |
+          VERSION=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
+          echo "value=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "This commit declares version $VERSION"
+
+      - name: Refuse to build a version that already exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          COUNT=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=helpdesk-$VERSION" --jq '.total_count')
+          if [ "$COUNT" != "0" ]; then
+            echo "::error::helpdesk-$VERSION was already built. Bump the version in pyproject.toml."
+            exit 1
+          fi
+          echo "helpdesk-$VERSION has never been built. Proceeding."
+
+      - name: Build the wheel
+        id: meta
+        run: |
+          python -m pip install --quiet build
+          python -m build --wheel
+          WHEEL=$(ls dist/*.whl)
+          DIGEST=$(sha256sum "$WHEEL" | cut -d' ' -f1)
+          ( cd dist && sha256sum "$(basename "$WHEEL")" > SHA256SUMS )
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+          echo "Built $WHEEL"
+          echo "sha256 $DIGEST"
+
+      - name: Store the artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: helpdesk-${{ steps.version.outputs.value }}
+          path: dist/
+          retention-days: 30
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Fetch the artifact this run just built
+        uses: actions/download-artifact@v4
+        with:
+          name: helpdesk-${{ needs.build.outputs.version }}
+          path: dist
+
+      - name: Verify the bytes
+        run: cd dist && sha256sum -c SHA256SUMS
+
+      - name: Deploy
+        run: |
+          echo "Deploying helpdesk ${{ needs.build.outputs.version }} to dev"
+          echo "sha256 ${{ needs.build.outputs.digest }}"
+          echo "Commit $GITHUB_SHA on $GITHUB_REF_NAME"

@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helpdesk-lite"
+version = "0.3.0"
+description = "A minimal support-ticket CLI for learning Git and GitHub Actions"
+requires-python = ">=3.10"
+
+[project.scripts]
+helpdesk = "helpdesk.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["helpdesk*"]
