@@ -3,10 +3,17 @@
     "docs/hd-101-first-pull-request.md": {
       "devto": {
         "content_hash": "1f76cb2a6ddf06465f4414539ee8a160ea8543c0dc57d711c5a7ee81dd63abda",
-        "posted_at": "2026-08-25T14:04:03+00:00",
+        "posted_at": "2026-08-25T14:08:50+00:00",
         "remote_id": "4485964",
-        "state": "draft",
-        "url": "https://dev.to/nazmur96/hd-101-the-first-pull-request-bea-temp-slug-9772224"
+        "state": "published",
+        "url": "https://dev.to/nazmur96/hd-101-the-first-pull-request-2fep"
+      },
+      "linkedin": {
+        "content_hash": "6ba5cc52af7715d4bf4b0be8a54864cf4c33f047977bf358994caa8a22228199",
+        "posted_at": "2026-08-25T14:08:51+00:00",
+        "remote_id": "urn:li:share:7498018560041123841",
+        "state": "published",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7498018560041123841/"
       }
     }
   },
