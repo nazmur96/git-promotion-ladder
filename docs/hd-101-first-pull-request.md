@@ -1,3 +1,25 @@
+---
+title: "HD-101 — The first pull request"
+crosspost:
+  devto: full
+  linkedin: summary
+  series: "Git promotion ladder"
+  tags: [git, github, devops, beginners]
+  canonical_url: https://github.com/nazmur96/git-promotion-ladder/blob/main/docs/hd-101-first-pull-request.md
+  summary: |
+    My first pull request merged with a green tick and nothing had checked
+    anything. No tests, no reviewers, no status checks — the PR was a change
+    of scenery, not a gate.
+
+    That emptiness is the whole lesson. A pull request is not a safety
+    mechanism; it is a place to attach safety mechanisms. Until you attach
+    them, "open a PR instead of pushing to main" is a habit, not a control.
+
+    Also worth knowing early: base is the destination, head is the source.
+    Get them backwards and you propose merging main into your feature branch,
+    which looks almost right and is completely wrong.
+  hashtags: [git, devops]
+---
 # HD-101 — The first pull request
 
 **Builds:** nothing. **Teaches:** why the next six tickets exist.
