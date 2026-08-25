@@ -66,7 +66,7 @@ Every PR has a **base** and a **head**:
 
 Get these backwards and you will open a PR proposing to merge `main` into your
 feature branch, which looks almost right and is completely wrong. It happens to
-everyone at least once. It happened here — see [mistakes.md](mistakes.md).
+everyone at least once. It happened here — see [mistakes.md](https://github.com/nazmur96/git-promotion-ladder/blob/main/docs/mistakes.md).
 
 **Also:** a PR's `head` has nothing to do with git's `HEAD` pointer. Same word,
 unrelated meanings. Git's `HEAD` is "where I am standing right now"; a PR's head is
@@ -78,4 +78,4 @@ Open the merged PR and look at the checks section. It's empty. Remember that.
 
 ---
 
-Next: **[HD-102 — Continuous integration](hd-102-continuous-integration.md)**
+Next: **[HD-102 — Continuous integration](https://github.com/nazmur96/git-promotion-ladder/blob/main/docs/hd-102-continuous-integration.md)**
